@@ -1,0 +1,183 @@
+.widgetContainer {
+  margin-bottom: 28px;
+  width: 100%;
+}
+
+.descriptionHeaderInner {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 32px;
+}
+
+.widgetContainer h1,
+.widgetContainer h2 {
+  text-align: center;
+}
+
+.widgetContainer h2 {
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.headerBtn {
+  display: block;
+  margin: 28px auto 0;
+}
+
+.widgetCard {
+  padding: 46px 0;
+  text-align: center;
+  background-color: gainsboro;
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.widgetCard span {
+  display: block;
+}
+
+.proxyListContainer {
+  width: 100%;
+  display: flex;
+}
+
+.proxyListInner {
+  display: flex;
+  flex-direction: row;
+  min-height: 700px;
+}
+
+.filterContainer {
+  width: 280px;
+  background-color: #f6f7f9;
+  padding: 20px;
+
+  .filterTitle {
+    font-size: 26px;
+    font-weight: 500;
+    text-align: start;
+  }
+
+  .checkBoxContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 26px;
+  }
+
+  .checkBoxContainer h3 {
+    margin-bottom: 5px;
+    font-weight: normal;
+  }
+
+  .checkBoxLabel {
+    padding-left: 26px;
+    cursor: pointer;
+    margin-bottom: 2px;
+    color: #979697;
+    display: flex;
+    align-items: center;
+  }
+
+  .checkBoxLabel span {
+    display: block;
+  }
+  .checkBoxLabelActive span:not(:last-child) {
+    color: #6f90d0;
+    border-bottom: 1px solid #6f90d0;
+  }
+}
+
+.remove {
+  color: #6791e9;
+  margin-left: 10px;
+  font-size: 10px;
+  display: block;
+}
+
+.proxyList {
+  flex: 1;
+  position: relative;
+}
+
+.exportContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  height: 50px;
+
+  .activeBtn {
+    background-color: black;
+    color: white;
+  }
+}
+
+.exportContainer span {
+  margin-right: 10px;
+}
+
+.exportContainer button {
+  padding: 8px 8px;
+  font-weight: normal;
+  margin-right: 4px;
+  background-color: #f6f7f9;
+  color: black;
+  font-size: 16px;
+}
+
+.downloadBtn {
+  margin-left: 10px;
+}
+
+.fpTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+  font-size: 22px;
+  table-layout: auto;
+  margin: 40px;
+}
+
+.fpThead {
+  border-bottom: 1px solid black;
+  font-size: 14px;
+  line-height: 16px;
+  color: #36363d;
+  height: 40px;
+}
+
+.fpThead th {
+  text-align: left;
+  padding: 16px;
+}
+
+.fpBody tr:not(:last-child) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.fpBody tr {
+  font-size: 16px;
+  line-height: 18px;
+}
+
+.fpBody td {
+  padding: 16px;
+}
+
+.pagination {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.pagination button {
+  padding: 4px 12px;
+  font-weight: normal;
+  font-size: 12px;
+  background-color: #ffffff;
+  color: #36363d;
+  border: 1px solid #979697;
+  text-transform: none;
+  margin: 0 12px;
+}

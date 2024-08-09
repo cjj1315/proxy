@@ -105,3 +105,34 @@ a {
     color-scheme: dark;
   }
 }
+
+button {
+  font-weight: 500;
+  font-size: 18px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.widget {
+  display: flex;
+  flex-direction: column;
+  padding: 0 32px 32px;
+  background-color: white;
+  align-items: center;
+}
+
+.inner {
+  max-width: min(100%,1180px);
+  width: 100%;
+}
