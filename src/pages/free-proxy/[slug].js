@@ -40,7 +40,6 @@ export const getStaticProps = async ({ params }) => {
     .select("*", { count: "exact" })
     .eq(columnName, currentList.name)
     .range(from, to);
-
   return {
     props: { proxyList, options, count },
   };

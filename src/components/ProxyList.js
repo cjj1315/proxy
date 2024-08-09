@@ -7,6 +7,7 @@ import styles from "@/styles/freeProxy.module.css";
 
 function ProxyList({ initProxyList, options, initCount }) {
   const [proxyList, setProxyList] = useState(initProxyList);
+
   const [count, setCount] = useState(initCount);
   const router = useRouter();
   const { slug } = router.query;
@@ -99,7 +100,7 @@ function ProxyList({ initProxyList, options, initCount }) {
     } else {
       initialLoad.current = false;
     }
-  }, [currentPage]);
+  }, [currentPage,slug]);
 
   const tableRows = proxyList.map((item, index) => (
     <tr key={index}>
@@ -134,9 +135,13 @@ function ProxyList({ initProxyList, options, initCount }) {
                         }`}
                         key={i.name}
                       >
-                        <span onClick={() => {
-                              router.push(`/free-proxy/${i.page_path_suffix}`);
-                            }}>{i.name}</span>
+                        <span
+                          onClick={() => {
+                            router.push(`/free-proxy/${i.page_path_suffix}`);
+                          }}
+                        >
+                          {i.name}
+                        </span>
                         {i.page_path_suffix === slug ? (
                           <span
                             onClick={() => {
@@ -185,18 +190,20 @@ function ProxyList({ initProxyList, options, initCount }) {
               </thead>
               <tbody className={styles.fpBody}>{tableRows}</tbody>
             </table>
-            <div className={styles.pagination}>
-              {/* 分页部分 */}
-              <button
-                onClick={() => {
-                  handlePagination("prev");
-                }}
-              >
-                Prev
-              </button>
-              <span>{currentPage}</span>
-              <button onClick={() => handlePagination("next")}>Next</button>
-            </div>
+            {count && count > 5 ? (
+              <div className={styles.pagination}>
+                {/* 分页部分 */}
+                <button
+                  onClick={() => {
+                    handlePagination("prev");
+                  }}
+                >
+                  Prev
+                </button>
+                <span>{currentPage}</span>
+                <button onClick={() => handlePagination("next")}>Next</button>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
