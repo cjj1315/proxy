@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from "react";
-import { AnonymityLevelsText } from "@/pages/enums";
+import { AnonymityLevelsText } from "@/util/enums";
 import { supabase, getPagination } from "@/util";
 import { useRouter } from "next/router";
 

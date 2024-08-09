@@ -11,7 +11,8 @@ export default function FreeProxy({ proxyList, options }) {
   return (
     <>
       <Head>
-        <title>Free Proxy,{currentList.page_title}</title>
+        <title>{options.page_title}</title>
+        <meta name="keywords" content="free proxy,safe proxy,Proxy IP Provider,proxy server" />
         <meta name="description" content={currentList.sub_title} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
