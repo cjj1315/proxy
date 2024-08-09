@@ -135,11 +135,35 @@ function ProxyList({ initProxyList, options, initCount }) {
     }
   }, [currentPage, slug]);
 
+  const handleCopyToClipboard = (text) => {
+    const textField = document.createElement("textarea");
+    textField.innerText = text;
+    document.body.appendChild(textField);
+    textField.select();
+    document.execCommand("copy");
+    textField.remove();
+    alert(`Copied ${text} to clipboard`);
+  };
+
   const tableRows = proxyList.map((item, index) => (
     <tr key={index}>
       <td>{item.id}</td>
-      <td>{item.address}</td>
-      <td>复制icon</td>
+      <td
+        style={{ cursor: "pointer" }}
+        onClick={() => {
+          handleCopyToClipboard(item.address);
+        }}
+      >
+        {item.address}
+      </td>
+      <td
+        style={{ cursor: "pointer" }}
+        onClick={() => {
+          handleCopyToClipboard(item.address);
+        }}
+      >
+        复制icon
+      </td>
       <td>{item.country}</td>
       <td>{item.protocols}</td>
       <td>{AnonymityLevelsText[item.level]}</td>
