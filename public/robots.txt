@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://proxy-green-eight.vercel.app
+
+# Sitemaps
+Sitemap: https://proxy-green-eight.vercel.app/sitemap.xml
+Sitemap: https://proxy-green-eight.vercel.app/free-proxy-sitemap.xml
