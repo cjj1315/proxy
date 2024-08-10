@@ -17,10 +17,9 @@ function ProxyList({ initProxyList, options, initCount, slug }) {
 
   useEffect(() => {
     setProxyList(initProxyList);
-    setCount(count)
+    setCount(initCount)
     setCurrentPage(1)
-  }, [initProxyList,count]);
-  console.log("slug",slug)
+  }, [initProxyList,initCount]);
 
   const filterList = useMemo(() => {
     const data = [
