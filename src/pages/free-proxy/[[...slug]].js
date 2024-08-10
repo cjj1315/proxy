@@ -10,7 +10,7 @@ export default function FreeProxy({ proxyList, options, count, slug }) {
   return (
     <>
       <Head>
-        <title>{options.page_title}</title>
+        <title>{currentList.page_title}</title>
         <meta
           name="keywords"
           content="free proxy,safe proxy,Proxy IP Provider,proxy server"
