@@ -83,7 +83,7 @@
   .checkBoxLabel span {
     display: block;
   }
-  .checkBoxLabelActive span:not(:last-child) {
+  .checkBoxLabelActive {
     color: #6f90d0;
     border-bottom: 1px solid #6f90d0;
   }

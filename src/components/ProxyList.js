@@ -1,15 +1,26 @@
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useMemo,useEffect } from "react";
+import Link from "next/link"
 import { AnonymityLevelsText } from "@/util/enums";
 import { supabase, getPagination } from "@/util";
-import { useRouter } from "next/router";
 import styles from "@/styles/freeProxy.module.css";
 
-function ProxyList({ initProxyList, options, initCount }) {
+function ProxyList({ initProxyList, options, initCount, slug }) {
+  const ExportTypes = {
+    Json: "JSON",
+    Csv: "CSV",
+    Txt: "TXT",
+  };
+  const [exportType, setExportType] = useState(ExportTypes.Json);
+  const [currentPage, setCurrentPage] = useState(1);
   const [proxyList, setProxyList] = useState(initProxyList);
-
   const [count, setCount] = useState(initCount);
-  const router = useRouter();
-  const { slug } = router.query;
+
+  useEffect(() => {
+    setProxyList(initProxyList);
+    setCount(count)
+    setCurrentPage(1)
+  }, [initProxyList,count]);
+  console.log("slug",slug)
 
   const filterList = useMemo(() => {
     const data = [
@@ -37,24 +48,25 @@ function ProxyList({ initProxyList, options, initCount }) {
     });
     return data;
   }, [options]);
-  const ExportTypes = {
-    Json: "JSON",
-    Csv: "CSV",
-    Txt: "TXT",
-  };
-  const [exportType, setExportType] = useState(ExportTypes.Json);
-  const [currentPage, setCurrentPage] = useState(1);
-  const initialLoad = useRef(true);
-
   const handlePagination = async (direction) => {
     const pageSize = 5;
     if (direction === "next") {
       const nextFrom = currentPage * pageSize;
       if (count > nextFrom) {
+        if (slug) {
+          await getSlugList(currentPage + 1);
+        } else {
+          await getList(currentPage + 1);
+        }
         setCurrentPage(currentPage + 1);
       }
     } else if (direction === "prev") {
       if (currentPage > 1) {
+        if (slug) {
+          await getSlugList(currentPage - 1);
+        } else {
+          await getList(currentPage - 1);
+        }
         setCurrentPage(currentPage - 1);
       }
     }
@@ -122,19 +134,6 @@ function ProxyList({ initProxyList, options, initCount }) {
     URL.revokeObjectURL(url);
   };
 
-  useEffect(() => {
-    // 初始加载时不触发数据获取逻辑
-    if (!initialLoad.current) {
-      if (slug) {
-        getSlugList(currentPage);
-        return;
-      }
-      getList(currentPage);
-    } else {
-      initialLoad.current = false;
-    }
-  }, [currentPage, slug]);
-
   const handleCopyToClipboard = (text) => {
     const textField = document.createElement("textarea");
     textField.innerText = text;
@@ -185,29 +184,24 @@ function ProxyList({ initProxyList, options, initCount }) {
                   {i.child.map((i) => {
                     return (
                       <label
-                        className={`${styles.checkBoxLabel} ${
+                        className={styles.checkBoxLabel}
+                        key={i.name}
+                      >
+                        <Link
+                          href={`/free-proxy/${encodeURIComponent(
+                            i.page_path_suffix
+                          )}`}
+                        >
+                          <span className={`${
                           i.page_path_suffix === slug
                             ? styles.checkBoxLabelActive
                             : ""
-                        }`}
-                        key={i.name}
-                      >
-                        <span
-                          onClick={() => {
-                            router.push(`/free-proxy/${i.page_path_suffix}`);
-                          }}
-                        >
-                          {i.name}
-                        </span>
+                        }`}>{i.name}</span>
+                        </Link>
                         {i.page_path_suffix === slug ? (
-                          <span
-                            onClick={() => {
-                              router.push("/free-proxy");
-                            }}
-                            className={styles.remove}
-                          >
-                            X
-                          </span>
+                          <Link href="/free-proxy">
+                            <span className={styles.remove}>X</span>
+                          </Link>
                         ) : null}
                       </label>
                     );
@@ -256,7 +250,6 @@ function ProxyList({ initProxyList, options, initCount }) {
             </table>
             {count && count > 5 ? (
               <div className={styles.pagination}>
-                {/* 分页部分 */}
                 <button
                   onClick={() => {
                     handlePagination("prev");

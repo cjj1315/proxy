@@ -1,12 +1,8 @@
 import { useMemo } from "react";
-import { useRouter } from 'next/router';
 import DescriptionHeader from "@/components/DescriptionHeader";
 import ProxyList from "@/components/ProxyList";
 
-function ProxyPage({ proxyList, options, defaultPage, count }) {
-  const router = useRouter();
-  const { slug } = router.query;
-
+function ProxyPage({ proxyList, options, slug, count }) {
   const pageText = useMemo(() => {
     if (!slug) {
       // todo: 枚举值
@@ -14,7 +10,7 @@ function ProxyPage({ proxyList, options, defaultPage, count }) {
     } else {
       return options.find((i) => i.page_path_suffix === slug);
     }
-  }, [options, defaultPage]);
+  }, [options]);
 
   return (
     <>
@@ -24,6 +20,7 @@ function ProxyPage({ proxyList, options, defaultPage, count }) {
           initProxyList={proxyList}
           options={options}
           initCount={count}
+          slug={slug}
         />
         TODO:样式
         <div>{pageText.footer_title}</div>
